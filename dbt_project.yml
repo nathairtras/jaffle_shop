@@ -1,7 +1,7 @@
 
 name: 'jaffle_shop'
 version: '0.1'
-profile: 'jaffle_shop'
+profile: 'jaffle_shop_sf'
 source-paths: ["models"]
 analysis-paths: ["analysis"]
 test-paths: ["tests"]
@@ -14,9 +14,26 @@ clean-targets:
     - "dbt_modules"
     - "logs"
 
+seeds:
+  jaffle_shop_raw:
+    database: RAW_JAFFLE
+    schema: SEED
+    full_refresh: true
+
 models:
   jaffle_shop:
-      materialized: table
+    materialized: table
+    processed_jaffle:
+      database: PROCESSED_JAFFLE
+      core:
+        schema: JAFFLE
+      secondary:
+        schema: JAFFLE2
+    stage_jaffle:
+      database: STAGE_JAFFLE
+      intermediate:
+        schema: INTERMEDIATE
       staging:
         materialized: view
+        schema: STAGING
         tags: ["staging", "hourly"]

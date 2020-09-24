@@ -1,0 +1,29 @@
+# example profiles.yml file
+jaffle_shop_sf:
+  target: devname
+  outputs:
+    devname:
+      type: snowflake
+      account: account.region
+      user: your.username
+      password: your.password
+      role: SYSADMIN
+      # Database name does not matter!
+      # It does not have to be a valid DB name
+      database: DEMO_DB
+      warehouse: DEVNAME_JAFFLE_WH
+      schema: public
+      threads: 4
+
+    production:
+      type: snowflake
+      account: account.region
+      user: service.username
+      password: service.password
+      role: SYSADMIN
+      # Database name does not matter!
+      # It does not have to be a valid DB name
+      database: DEMO_DB
+      warehouse: JAFFLE_WH
+      schema: public
+      threads: 4
